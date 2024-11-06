@@ -3,7 +3,7 @@
 #include <time.h>
 
 #define X 'X'
-#define O '0'
+#define O 'O'
 #define V ' '
 
 void gera_jogada (int *i, int *j)
@@ -85,7 +85,7 @@ int main ()
         printf("Digite a linha e a coluna: ");
         do
         {
-            scanf("%d %d", &i, &j);
+            scanf(" %d %d", &i, &j);
             i--; j--;
         } while (!check_jogada(M, i, j));
         M[i][j] = X;
