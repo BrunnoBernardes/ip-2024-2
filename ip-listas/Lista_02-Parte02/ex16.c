@@ -2,9 +2,9 @@
 
 void scan_entrada(int *TA, int *TB)
 {
-    do scanf("%d", TA);
+    do scanf(" %d", TA);
     while (*TA < 1 || *TA > 100);
-    do scanf("%d", TB);
+    do scanf(" %d", TB);
     while (*TB < 1 || *TB > 100);
 }
 
@@ -13,7 +13,7 @@ void scan_conjunto(int *conjunto, int tamanho)
     int i = 0, j, valor;
     while(i < tamanho)
     {
-        scanf("%d", &valor);
+        scanf(" %d", &valor);
         for (j = 0; j < i; j++)
         {
             if (conjunto[j] == valor)
@@ -35,7 +35,7 @@ void print_conjunto(int *conjunto, int tamanho)
         printf("%d", conjunto[i]);
         if (i != (tamanho - 1)) printf(",");
     }
-    printf(") \n");
+    printf(")\n");
 }
 
 void subtracao_conjunto(int *A, int TA, int *B, int TB)
@@ -70,7 +70,7 @@ void multiplicacao_conjunto(int *A, int TA, int *B, int TB)
             else printf("(%dx%d)", A[i], B[j]);
         }
     }
-    printf(") \n");
+    printf(")\n");
 }
 
 int main()
