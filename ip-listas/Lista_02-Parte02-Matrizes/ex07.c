@@ -48,10 +48,10 @@ int main ()
     scanf("%d%*c%c%*c%c", &dimensao, &borda, &centro);
 
     // Verifica se a dimensão é válida (ímpar)
-    if (dimensao % 2 == 0)
+    if (dimensao % 2 == 0 || dimensao > MAX)
     {
         printf("Dimensao invalida!\n");
-        return 1;
+        return 0;
     }
 
     losango(M, dimensao, borda, centro); // Preenche a matriz com o padrão de losango
@@ -61,7 +61,14 @@ int main ()
     {
         for (j = 0; j < dimensao; j++)
         {
-            printf("%c ", M[i][j]);
+            if (i == dimensao / 2 && j == dimensao - 1)
+            {
+                printf("%c", M[i][j]); // Não imprime espaço após o último caractere da linha central
+            }
+            else
+            {
+                printf("%c ", M[i][j]);
+            }
         }
         printf("\n");
     }

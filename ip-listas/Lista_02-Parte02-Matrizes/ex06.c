@@ -20,7 +20,14 @@ void print_pgm(int largura, int altura, int M[MAX_L][MAX_A])
     {
         for (j = 0; j < altura; j++)
         {
-            printf("%d ", M[i][j]);
+            if (j == altura - 1) // Último pixel da linha
+            {
+                printf("%d", M[i][j]);
+            }
+            else
+            {
+                printf("%d ", M[i][j]);
+            }
         }
         printf("\n"); // Nova linha após cada linha de pixels
     }
@@ -35,9 +42,15 @@ int main ()
     int M[MAX_L][MAX_A];
     int i, j;
 
-    scanf("%d %d", &largura, &altura);
+    scanf("%d%d", &largura, &altura);
     scanf("%d", &borda);
     scanf("%d", &valor);
+
+    // Verifica se a largura e altura estão dentro dos limites
+    if (largura > MAX_L || altura > MAX_A)
+    {
+        return 0;
+    }
 
     // Define a matriz com a borda
     for (i = 0; i < largura; i++)
