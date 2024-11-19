@@ -1,0 +1,89 @@
+1 - ALOCAÇÃO DINÂMICA (definida em tempo de execução)
+
+- A função malloc aloca uma quantidade fixa de bytes na memória.
+- A instrução malloc(12) aloca 12 bytes e retorna a posição (ponteiro) da 1ª posição.
+- Biblioteca necessária: <stdlib.h>.
+
+Exemplo:
+
+void *ptr = malloc(12);
+
+Os 12 bytes podem ser usados a seu critério.
+ex: 12 caracteres ou 3 inteiros
+
+
+
+2 - ALOCANDO VARIÁVEIS SIMPLES
+
+EXEMPLO COM INTEIROS:
+
+int *p = NULL;
+p = (int *) malloc(sizeof(int));
+*p = 10;
+
+EXEMPLO COM CARACTERES:
+
+char *pc = NULL;
+pc = (char *) malloc(sizeof(char));
+*pc = 'x';
+
+
+
+3 - ALOCANDO VETORES
+
+int *p = NULL;
+int n = 5; // n também pode ser lido via scanf.
+p = (int *) malloc(n * sizeof(int));
+
+// Acessando elementos do vetor:
+p[0] = 1;
+p[2] = 80;
+
+
+Código do Capeta:
+
+. while (1){
+    p = malloc(1000)
+}.
+
+
+
+4 - DESALOCANDO MEMÓRIA
+
+- A função 'free' libera a memória previamente alocada.
+- Protótipo: 'void free(void *);'
+
+Exemplo:
+
+int *p = (int *) malloc(10 * sizeof(int));
+free(p);
+
+
+
+
+5 - ALOCANDO VETORES (USANDO CALLOC)
+
+- A função 'calloc' aloca memória para um vetor e inicializa todos os bytes com zero.
+- Protótipo: 'void *calloc(unsigned int n_member, unsigned int size_member);'
+
+Exemplo:
+
+int *p = (int *) calloc(10, sizeof(int));
+
+-> Calloc zera toda a memória. <-
+
+
+
+6 - REALOCANDO VETORES
+
+- A função 'realloc' ajusta o tamanho de um bloco de memória previamente alocado.
+- Protótipo: 'void *realloc(void *ptr, unsigned int n_bytes);'
+
+Exemplo:
+
+int *p = (int *) calloc(3, sizeof(int)); // Aloca espaço para 3 inteiros
+
+p = (int *) realloc(p, 5 * sizeof(int)); // Realoca espaço para 5 inteiros
+
+-> Se o novo tamanho for maior, os novos bytes não são inicializados. <-
+-> Se o novo tamanho for menor, a memória excedente será liberada. <-
