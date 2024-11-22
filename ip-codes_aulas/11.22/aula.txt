@@ -1,0 +1,134 @@
+Alocação Dinâmica de Matrizes
+
+- Matriz estática:
+  int A[2][3];
+
+  Representação:
+  -------------------------------
+  | A[0][0] | A[0][1] | A[0][2] |
+  -------------------------------
+  | A[1][0] | A[1][1] | A[1][2] |
+  -------------------------------
+
+  A[0] -> {A[0][0], A[0][1], A[0][2]}
+  A[1] -> {A[1][0], A[1][1], A[1][2]}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+- Matrizes estáticas de caracteres:
+  char A[3][128];
+
+  Descrição:
+  A matriz 'A' possui 3 linhas e 128 colunas. Cada linha pode ser tratada como uma string de até 127 caracteres (128 inclui o caractere nulo '\0').
+
+  Representação:
+  A[0] -> primeira linha (128 posições)
+  A[1] -> segunda linha (128 posições)
+  A[2] -> terceira linha (128 posições)
+
+  Exemplo de uso:
+  scanf("%s", A[0]); // Le a string e armazena na primeira linha da matriz
+  scanf("%s", A[1]); // Le a string e armazena na segunda linha da matriz
+  scanf("%s", A[2]); // Le a string e armazena na terceira linha da matriz
+
+  Observação:
+  O tipo de 'A[i]' é 'char *' (ponteiro para o primeiro caractere da linha i da matriz).
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+- Ponteiro de Ponteiro:
+
+  Código:
+  int A = 2;
+  int X = 10;
+
+  int *p = &X;
+  int **pp = &p;
+  int ***ppp = &pp;
+
+  Representação:
+  ---------------
+  Variável 'X': armazena o valor 10.
+  Ponteiro 'p': aponta para o endereço de 'X'.
+  Ponteiro duplo 'pp': aponta para o endereço de 'p'.
+  Ponteiro triplo 'ppp': aponta para o endereço de 'pp'.
+
+  Operações:
+  **pp -> acessa o valor armazenado em 'X' (10).
+  *pp -> acessa o ponteiro 'p'.
+  ***ppp -> acessa o valor armazenado em 'X' através de 'pp' e 'p'.
+
+  Diagrama:
+  ------------------------
+  int X = 10;        -> armazena o valor 10.
+  int *p = &X;       -> aponta para o endereço de 'X'.
+  int **pp = &p;     -> aponta para o endereço de 'p'.
+  int ***ppp = &pp;  -> aponta para o endereço de 'pp'.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+- Matrizes Dinâmicas:
+
+  Código:
+  int **M = NULL;
+
+  // Alocação dinâmica (2x3)
+  M = (int **) malloc(2 * sizeof(int *));
+  M[0] = (int *) malloc(3 * sizeof(int));
+  M[1] = (int *) malloc(3 * sizeof(int));
+
+  Representação:
+  ---------------
+  1. 'M' é um ponteiro para ponteiros de inteiros.
+  2. M[0] e M[1] são alocados dinamicamente como arrays de 3 inteiros.
+
+  Exemplo de estrutura:
+  ----------------------
+  M[0]: [int][int][int]
+  M[1]: [int][int][int]
+
+  Diagrama:
+  ----------------------
+  M -> aponta para os ponteiros M[0] e M[1]:
+     M[0] -> aloca memória para 3 inteiros.
+     M[1] -> aloca memória para 3 inteiros.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Alocação Dinâmica 2D:
+
+ Código:
+ int **M = NULL;
+ int nl, nc, l;
+
+ // Leitura do número de linhas (nl) e colunas (nc)
+ scanf("%d %d", &nl, &nc);
+
+ // Alocação dinâmica do vetor de ponteiros
+ M = (int **) malloc(nl * sizeof(int *));
+
+ // Alocação dinâmica de memória para cada linha
+ for (l = 0; l < nl; l++) {
+     M[l] = (int *) calloc(nc, sizeof(int));
+    }
+
+ Representação:
+ - 'M' é um ponteiro para ponteiros (matriz dinâmica).
+ - Cada linha 'M[l]' aponta para um bloco de memória com 'nc' inteiros, inicializados com 0 devido ao uso do 'calloc'.
+
+ Diagrama:
+ M -> [M[0], M[1], ..., M[nl-1]]
+     M[0] -> [0, 0, 0, ..., 0] (nc colunas)
+     M[1] -> [0, 0, 0, ..., 0] (nc colunas)
+     ...
+     M[nl-1] -> [0, 0, 0, ..., 0] (nc colunas)
+
+Desalocação Dinâmica 2D:
+
+ Código:
+ for (l = 0; l < nl; l++) {
+        free(M[l]);
+    }
+    free(M);
+
+---------------------------------------------------------------------------------------------------------------------------------------------------

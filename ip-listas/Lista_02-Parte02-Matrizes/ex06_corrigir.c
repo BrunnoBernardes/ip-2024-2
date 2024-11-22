@@ -39,7 +39,7 @@ void print_pgm(int largura, int altura, int M[MAX_L][MAX_A])
 int main ()
 {
     int largura, altura, borda, valor;
-    int M[MAX_L][MAX_A];
+    int M[MAX_L][MAX_A] = {0}; // Matriz de pixels
     int i, j;
 
     scanf("%d%d", &largura, &altura);
@@ -58,13 +58,9 @@ int main ()
         for (j = 0; j < altura; j++)
         {
             // Se a posição estiver dentro da borda, define o valor especificado
-            if (i < borda || i >= largura - borda || j < borda || j >= altura - borda)
+            if (i < borda || i >= (largura - borda) || j < borda || j >= (altura - borda))
             {
                 M[i][j] = valor;
-            }
-            else
-            {
-                M[i][j] = 0; // Interior sem borda recebe valor zero (preto)
             }
         }
     }
