@@ -1,0 +1,83 @@
+Estruturas (struct)
+
+Uma estrutura permite criar tipos heterogêneos de dados.
+Além disso, permite relacionar um grupo de parâmetros a uma única entidade, composta por vários valores.
+
+- Um ponto em 2D:
+
+  - Possui coordenadas x e y;
+  - Pode ter um nome.
+
+  Podemos agrupar esses dados definindo uma estrutura:
+
+  struct point2D {  
+     char name[32];  
+     double x, y;  
+    };  
+ 
+  A declaração acima define:
+  - O tipo de dado 'struct point2D', composto por 3 variáveis.
+
+  struct point2D PA; // Declara a variável PA.
+
+  - PA.name é o vetor nome de PA. (char[32])
+  - PA.x é a coordenada X de PA. (double)
+  - PA.y é a coordenada Y de PA. (double)
+
+  Tipos de Formato: Heterogêneos.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+- Inicialização de Estruturas
+  
+  ➔ Na declaração:
+  struct point2D p = { "A", 2, 3 };
+  struct point2D x = {
+      .x = 4,
+      .name = "vertice",
+      .y = 2
+    };
+
+  ➔ Por atribuição: ( = operador )
+  struct point2D pA = { "A", 2, 3 };
+  struct point2D pB = pA; // Os bytes de pA são copiados para pB.
+
+  pA.x = 5;
+  pA.y = pB.x;
+
+  strcpy(pA.name, "novo-nome");
+
+  ➔ Via scanf:
+  scanf("%lf", &(pA.x));
+  scanf("%s", pA.name);
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+- Atenção!!!
+
+  Tipos de dados criados por usuários não são conhecidos pelo compilador!!
+
+  (double) + (double) → double
+  pA.x + pA.y → OK
+
+  (point2D) + (point2D) → ?
+  pA + pB → ?
+
+  scanf("%?", &pA) → ?
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+- Operações com tipos struct devem ser definidas pelo usuário:
+  
+  point2D p2d_sum(point2D A, point2D B) {
+        point2D X;
+
+        X.x = A.x + B.x;
+        X.y = A.y + B.y;
+
+        strcpy(X.name, "ponto x");
+
+      return X;
+    }
+
+  point2D X = p2d_sum(pA, pB);
