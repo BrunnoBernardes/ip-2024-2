@@ -16,7 +16,7 @@ void complex_print( const Complex * n ) {
 void complex_print_polar( const Complex * n ) {
 	double rho, theta;
 	rho = sqrt( n->r*n->r + n->i*n->i );
-	theta = atan2( n->i, n->r ) * 180/M_PI;
+	theta = atan2( n->i, n->r ) * 180; ///M_PI;
     printf("%.1lfL%.1lf°", rho, theta);
 }
 Complex complex_vsum( Complex A, Complex B ) {

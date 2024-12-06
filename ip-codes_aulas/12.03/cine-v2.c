@@ -1,7 +1,12 @@
 #include <stdio.h>
 
-typedef unsigned char bool;
+// Inicializar as regioes vip e preferencial
+// Aprimorar a reserva
+// Implementar a liberacao
+// Valor instantaneo das reservas
 
+
+typedef unsigned char bool;
 typedef struct {
 	bool livre;
     char tipo_poltrona; // 'N' = Normal, 'V' = VIP
@@ -9,17 +14,9 @@ typedef struct {
 	double valor;
 } Poltrona;
 
-#define N_FILAS 6 // Defina o número de filas da sala
-#define N_COLS 6 // Defina o número de colunas da sala
-#define PREF_FILA_INICIO 'A' // Defina a fila de início das poltronas preferenciais
-#define PREF_FILA_FIM 'A' // Defina a fila de fim das poltronas preferenciais
-#define PREF_COL_INICIO 2 // Defina a coluna de início das poltronas preferenciais
-#define PREF_COL_FIM 4 // Defina a coluna de fim das poltronas preferenciais
-#define VIP_FILA_INICIO 'B' // Defina a fila de início das poltronas VIP
-#define VIP_FILA_FIM 'D' // Defina a fila de fim das poltronas VIP
-#define VIP_COL_INICIO 2 // Defina a coluna de início das poltronas VIP
-#define VIP_COL_FIM 5 // Defina a coluna de fim das poltronas VIP
-#define FALSE 0 
+#define N_FILAS 4
+#define N_COLS 6
+#define FALSE 0
 #define TRUE 1
 
 typedef struct {
@@ -27,37 +24,92 @@ typedef struct {
 } Cine;
 
 void cine_define_vip(Cine *cine) {
-    int i, j;
+    char fila_inicio, fila_fim;
+    int col_inicio, col_fim;
+    int l, c;
     double valor;
+
+    printf("\n--- Inicializando Poltronas VIP ---\n");
+    printf("\nEscolha o intervalo de filas (ex: A D): ");
+    scanf(" %c %c", &fila_inicio, &fila_fim);
+
+    fila_inicio = fila_inicio - 'A';
+    fila_fim = fila_fim - 'A';
+
+    // Verifica se as filas são válidas
+    if (fila_inicio < 0 || fila_inicio >= N_FILAS || fila_fim < 0 || fila_fim >= N_FILAS || fila_inicio > fila_fim) {
+        printf("Filas inválidas!\n");
+        return;
+    }
+
+    printf("\nEscolha o intervalo de colunas (ex: 2 4): ");
+    scanf("%d %d", &col_inicio, &col_fim);
+
+    // Verifica se as colunas são válidas
+    if (col_inicio < 0 || col_fim >= N_COLS || col_inicio > col_fim) {
+        printf("Colunas inválidas!\n");
+        return;
+    }
 
     printf("\nEntre com o valor do ingresso VIP: ");
     scanf("%lf", &valor);
 
-    for (i = VIP_FILA_INICIO - 'A'; i <= VIP_FILA_FIM - 'A'; i++) {
-        for (j = VIP_COL_INICIO; j <= VIP_COL_FIM; j++) {
-            cine->P[i][j].livre = TRUE;
-            cine->P[i][j].tipo_cliente = 'N';
-            cine->P[i][j].tipo_poltrona = 'V';
-            cine->P[i][j].valor = valor;
+    // Define as poltronas no intervalo fornecido
+    for (l = fila_inicio; l <= fila_fim; l++) {
+        for (c = col_inicio; c <= col_fim; c++) {
+            cine->P[l][c].livre = TRUE;
+            cine->P[l][c].tipo_cliente = 'N';
+            cine->P[l][c].tipo_poltrona = 'V';
+            cine->P[l][c].valor = valor;
         }
     }
+
+    printf("\nPoltronas VIP definidas com sucesso!\n");
 }
 
-void cine_define_preferencial(Cine *cine) {
-    int i, j;
+
+void cine_define_preferencial( Cine *cine) {
+    char fila_inicio, fila_fim;
+    int col_inicio, col_fim;
+    int l, c;
     double valor;
+
+    printf("\n--- Inicializando Poltronas Preferenciais ---\n");
+    printf("\nEscolha o intervalo de filas (ex: A D): ");
+    scanf(" %c %c", &fila_inicio, &fila_fim);
+
+    fila_inicio = fila_inicio - 'A';
+    fila_fim = fila_fim - 'A';
+
+    // Verifica se as filas são válidas
+    if (fila_inicio < 0 || fila_inicio >= N_FILAS || fila_fim < 0 || fila_fim >= N_FILAS || fila_inicio > fila_fim) {
+        printf("Filas inválidas!\n");
+        return;
+    }
+
+    printf("\nEscolha o intervalo de colunas (ex: 2 4): ");
+    scanf("%d %d", &col_inicio, &col_fim);
+
+    // Verifica se as colunas são válidas
+    if (col_inicio < 0 || col_fim >= N_COLS || col_inicio > col_fim) {
+        printf("Colunas inválidas!\n");
+        return;
+    }
 
     printf("\nEntre com o valor do ingresso preferencial: ");
     scanf("%lf", &valor);
 
-    for (i = PREF_FILA_INICIO - 'A'; i <= PREF_FILA_FIM - 'A'; i++) {
-        for (j = PREF_COL_INICIO; j <= PREF_COL_FIM; j++) {
-            cine->P[i][j].livre = TRUE;
-            cine->P[i][j].tipo_cliente = 'P';
-            cine->P[i][j].tipo_poltrona = 'N';
-            cine->P[i][j].valor = valor;
+    // Define as poltronas no intervalo fornecido
+    for (l = fila_inicio; l <= fila_fim; l++) {
+        for (c = col_inicio; c <= col_fim; c++) {
+            cine->P[l][c].livre = TRUE;
+            cine->P[l][c].tipo_cliente = 'P';
+            cine->P[l][c].tipo_poltrona = 'N';
+            cine->P[l][c].valor = valor;
         }
     }
+
+    printf("\nPoltronas VIP definidas com sucesso!\n");
 }
 
 void cine_init( Cine * cine ) {
@@ -65,21 +117,6 @@ void cine_init( Cine * cine ) {
 	double valor;
 
 	printf("\n--- Inicializando Cinema ---\n");
-
-	// Validações dos limites
-    if (VIP_FILA_INICIO - 'A' < 0 || VIP_FILA_FIM - 'A' >= N_FILAS || VIP_FILA_INICIO > VIP_FILA_FIM ||
-        VIP_COL_INICIO < 0 || VIP_COL_FIM >= N_COLS || VIP_COL_INICIO > VIP_COL_FIM) {
-        printf("\nErro: Definições de VIP fora dos limites da sala.\n");
-        return;
-    }
-    if (PREF_FILA_INICIO - 'A' < 0 || PREF_FILA_FIM - 'A' >= N_FILAS || PREF_FILA_INICIO > PREF_FILA_FIM ||
-        PREF_COL_INICIO < 0 || PREF_COL_FIM >= N_COLS || PREF_COL_INICIO > PREF_COL_FIM) {
-        printf("\nErro: Definições preferenciais fora dos limites da sala.\n");
-        return;
-    }
-
-	printf("\nPoltronas definidas com sucesso!\n");
-
 	printf("\nEntre com o valor do ingresso normal: ");
 	scanf("%lf", &valor);
 
@@ -128,6 +165,7 @@ void cine_print( const Cine * cine ) {
 		}
 		printf("\n");
 	}
+
 }
 
 #define RESERVAR	1
