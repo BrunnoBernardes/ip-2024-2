@@ -68,17 +68,24 @@ void somaOuSubtraiPolinomios(Termo p1[], int n1, Termo p2[], int n2, char operac
         j++;
     }
 
-    // Impressão do polinômio resultante
+    // Impressão do polinômio resultante com ajuste para o sinal explícito
     for (t = 0; t < k; t++) {
-        if (t > 0 && resultado[t].coeficiente > 0) { // Adiciona sinal de adição para coeficientes positivos
-            printf("+");
-        }
-
-        // Verifica se o expoente é zero
-        if (resultado[t].expoente == 0) {
-            printf("%.2lf", resultado[t].coeficiente); // Imprime apenas o coeficiente
+        if (resultado[t].coeficiente < 0) {
+            printf("-"); // Imprime sinal de negativo explicitamente
+            if (resultado[t].expoente == 0) {
+                printf("%.2lf", -resultado[t].coeficiente);
+            } else {
+                printf("%.2lfX^%d", -resultado[t].coeficiente, resultado[t].expoente);
+            }
         } else {
-            printf("%.2lfX^%d", resultado[t].coeficiente, resultado[t].expoente);
+            if (t > 0) {
+                printf("+"); // Adiciona o sinal de adição para coeficientes positivos
+            }
+            if (resultado[t].expoente == 0) {
+                printf("%.2lf", resultado[t].coeficiente);
+            } else {
+                printf("%.2lfX^%d", resultado[t].coeficiente, resultado[t].expoente);
+            }
         }
     }
     printf("\n");
