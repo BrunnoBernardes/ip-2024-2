@@ -1,14 +1,13 @@
 #include <stdio.h>
 
-int main ()
-{
-    int n;
-    FILE *f = fopen("input", "r");
-    while (1)
-    {
-        if (fscanf(f, "%d", &n) == EOF) break;
-        printf("%d\n", n);
-    }
-    
-    return 0;
+int main() {
+	int n;
+	FILE * arq = fopen("input", "r");
+	while(1) {
+		if(fscanf(arq,"%d", &n)==EOF) break;
+		printf("%d,", n);
+	}
+	printf("\n");
+	fclose(arq);
+	return 0;
 }
